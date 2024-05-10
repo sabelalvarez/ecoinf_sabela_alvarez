@@ -74,4 +74,12 @@ Grafica_Companeros <- ggplot(data = Tabla_Companeros,
 Grafica_Companeros
 ```
 
+## ¿Qué sucedió?
 
+La verdad es que, una vez visto la gráfica que creamos, nos dimos cuenta de que aquellas personas cuya edad se acercaba más a la nuestra, independientemente de los "pros" y "contras" que les hubiésemos asignado, alcanzaban una escala de puntuación de 10, o muy cercana.
+
+De hecho, nos fijamos que a esas personas de 30 años, aproximadamente, les asignamos "pros", pero prácticamente ninguna tenía "contra", lo que nos hacía pensar también que, subjetivamente, nos convencían más y las veíamos con mejores ojos.
+
+Por lo tanto, nos pusimos en contacto con Clara y con Ana.
+
+Lamentablemente, Clara ya había encontrado piso. Entonces tuvimos que quedarnos con Ana. Al principio todo salió bien, pero al mes de vivir con nosotros tuvo que volver a mudarse y tuvimos que buscar compañero/a de nuevo. Fue una faena de excels, Rmarkdowns, gráficas y estadística, pero al final encontramos a un chico, Pepe, que venía con su perrito, y estamos encantados.
