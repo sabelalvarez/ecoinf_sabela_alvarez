@@ -15,22 +15,63 @@ text-align: justify}
 </style>
 ```
 
-## R Markdown
+# Post-Elección de compañero/a de piso
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+## ¿Quiénes éramos?
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+Éramos un chico, profe de inglés, y una chica, estudiante de máster, de 30 años, que buscábamos compañero/a de piso.
 
-```{r cars}
-summary(cars)
+## ¿Qué buscábamos?
+
+Se nos había quedado una habitación libre del piso y nos encontrábamos en plena búsqueda de compañero/a: un/a compi que le gustase hacer cosas en común, con quien echarnos una peli de vez en cuando, jugar a jueguitos de mesa y nos lo pasásmos bien viviendo en compañía. Además, considerábamos **imprescindible** que esta persona tuviese perro o gato, porque nos encantan los animales.
+
+## ¿Qué pretendíamos?
+
+Como somos unos apasionados de la informática y de la programación, decidimos hacer la búsqueda más amena (para nosotros, claro) haciendo unos simples análisis estadísticos en R, y unos cuantos grafiquitos... *¿qué puede salir mal?* Nos habían entrado **muchísimas** solicitudes y teníamos muchísimas dudas, por lo que decidimos que la "máquina" nos echara una mano.
+
+## Los pasos que seguimos
+
+### Paso 1
+
+En primer lugar, instalamos los paquetes de excel, tidyverse, ggplot2, DT y kableExtra. Esto no se veía en la página web, porque lo ocultamos del Rmarkdown.
+
+```{r, include=FALSE}
+install.packages("xlsx", repos="https://cran.r-project.org")
+install.packages("tidyverse", repos = "https://cran.r-project.org")
+install.packages("ggplot2", repos = "https://cran.r-project.org")
+install.packages("DT", repos = "https://cran.r-project.org")
+install.packages("kableExtra", repos = "https://cran.r-project.org")
+library(xlsx)
+library(tidyverse)
+library(ggplot2)
+library(DT)
+library(kableExtra)
+
 ```
 
-## Including Plots
+### Paso 2
 
-You can also embed plots, for example:
+En segundo lugar, creamos una tabla, que llamamos "Tabla_Companeros", donde aunamos todos los datos que consideramos de interés para seleccionar al **compañero definitivo**: edad, ámbito de trabajo, pros, contras, y la escala en la que colocamos a ese posible compañero en función de esos parámetros.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+Tabla_Companeros<-read.xlsx(file="/Users/sabel/OneDrive/Escritorio/Master_UGR/Asignaturas/Ecoinformatica/proyectos_ecoinformatica/data/entrega_1_escala_companeros.xlsx", sheetName = "Escala")
+Tabla_Companeros %>%
+    kbl() %>%
+    kable_paper("hover",
+                full_width = F)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+### Paso 3
+
+A partir de la tabla Tabla_Companeros, hicimos el gráfico "Grafica_Companeros"
+
+```{r, echo=TRUE}
+Grafica_Companeros <- ggplot(data = Tabla_Companeros,
+       mapping = aes(x=Edad,
+                     y=Escala)) +
+      geom_line() +
+      labs(title="Posible compañero/a")
+Grafica_Companeros
+```
+
+
