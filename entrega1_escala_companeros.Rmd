@@ -1,0 +1,103 @@
+---
+title: "Elección de compañero/a de piso"
+author: "Sabela Álvarez López"
+date: "2024-01-24"
+output: 
+  html_document: 
+    toc: true
+    fig_width: 15
+bibliography: references.bib
+---
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+# Elección de compañero/a de piso
+
+## ¿Quiénes somos?
+
+Somos un chico, profe de inglés, y una chica, estudiante de máster, de 30 años, que buscamos compañero/a de piso. Somos dos cachitos de pan, de verdad. ¡Estamos teniendo muchísimas solicitudes porque somos adorables! Está mal que lo digamos nosotros, pero es que somos los compañeros de piso perfectos. ¿No te lo crees? De verdad; somos geniales.
+
+En serio. *Literalmente somos esto:*
+
+![](perrete%20adorable.jpg)
+
+## ¿Qué buscamos?
+
+Actualmente, se nos ha quedado una habitación libre del piso y nos encontramos en plena búsqueda de compañero/a. [Aquí](https://www.idealista.com/inmueble/103675541/) puedes encontrar el enlace al anuncio del idealista, pero vamos, ya te digo yo lo que buscamos: un/a compi que le guste hacer cosas en común, que nos echemos una peli de vez en cuando, que juguemos a jueguitos de mesa y nos lo pasemos bien viviendo en compañía. Además, consideramos **imprescindible** que esta persona tenga perro o gato, porque nos encantan los animales.
+
+Por otra parte, hay que tener en cuenta que la ubicación del piso es perfecta:
+
+<video width="100%" controls>
+
+<source src="video.mp4" type="video/mp4">
+
+</video>
+
+## ¿Qué pretendemos?
+
+Como somos unos apasionados de la informática y de la programación, hemos decidido hacer la búsqueda más amena (para nosotros, claro) haciendo unos simples análisis estadísticos en R, y unos cuantos grafiquitos... *¿qué puede salir mal?* Y como decíamos, somos tan geniales, que nos han entrado **muchísimas** solicitudes. Ahora tenemos muchísimas dudas, por lo que hemos decidido que la "máquina" nos eche una mano. Algo se nos tiene que estar escapando.
+
+## Pasos que seguiremos
+
+### Paso 1
+
+En primer lugar, instalaremos los paquetes de excel, tidyverse, ggplot2, DT y kableExtra. Esto no se verá en la página web, porque lo ocultaremos del Rmarkdown.
+
+```{r, include=FALSE}
+install.packages("xlsx", repos="https://cran.r-project.org")
+install.packages("tidyverse", repos = "https://cran.r-project.org")
+install.packages("ggplot2", repos = "https://cran.r-project.org")
+install.packages("DT", repos = "https://cran.r-project.org")
+install.packages("kableExtra", repos = "https://cran.r-project.org")
+library(xlsx)
+library(tidyverse)
+library(ggplot2)
+library(DT)
+library(kableExtra)
+
+```
+
+### Paso 2
+
+En segundo lugar, creamos una tabla, que llamaremos "Tabla_Companeros", donde hemos aunado todos los datos que consideramos de interés para seleccionar al **compañero definitivo**: edad, ámbito de trabajo, pros, contras, y la escala en la que colocamos a ese posible compañero en función de esos parámetros.
+
+```{r}
+Tabla_Companeros<-read.xlsx(file="/Users/sabel/OneDrive/Escritorio/Master_UGR/Asignaturas/Ecoinformatica/proyectos_ecoinformatica/data/entrega_1_escala_companeros.xlsx", sheetName = "Escala")
+Tabla_Companeros %>%
+    kbl() %>%
+    kable_paper("hover",
+                full_width = F)
+```
+
+### Paso 3
+
+A partir de la tabla Tabla_Companeros, vamos a hacer el gráfico "Grafica_Companeros"
+
+```{r, echo=TRUE}
+Grafica_Companeros <- ggplot(data = Tabla_Companeros,
+       mapping = aes(x=Edad,
+                     y=Escala)) +
+      geom_line() +
+      labs(title="Posible compañero/a")
+Grafica_Companeros
+```
+
+## Conclusiones
+
+La verdad es que, una vez visto la gráfica que hemos creado, nos hemos dado cuenta de que aquellas personas cuya edad se acercaba más a la nuestra, independientemente de los "pros" y "contras" que les hayamos asignado, alcanzaban una escala de puntuación de 10, o muy cercana.
+
+De hecho, nos hemos fijado que a esas personas de 30 años, aproximadamente, les asignamos "pros", pero prácticamente ninguna tiene "contra", lo que nos hace pensar también que, subjetivamente, nos convencían más y las veíamos con mejores ojos.
+
+Esto solo quiere decir una cosa... ¡Tenemos que llamar a Clara y a Ana!
+
+## Bibliografía
+
+[Kenyon, E., Heath, S. (2001). Choosing this life: narratives of choice amongst house sharers. Housing studies, 16:5, 619-635.](https://www.tandfonline.com/doi/abs/10.1080/02673030120080080)
+
+[Heath, S., Kenyon, L. (2001). Single young professionals and shared household living. Journal of Youth Studies, 4:1, 83-100.](https://www.tandfonline.com/doi/abs/10.1080/13676260120028565?src=recsys)
+
+[Clark, V., Tuffin, K., Frewin, K., Bowker, N. (2017). Shared housing among young adults: avoiding complications in domestic relationships. Journal of Youth Studies, 20:9, 1191-1207.](https://www.tandfonline.com/doi/full/10.1080/13676261.2017.1316834?src=recsys)
