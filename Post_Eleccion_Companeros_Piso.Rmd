@@ -1,8 +1,11 @@
 ---
-title: "Post_Eleccion_Companeros_Piso"
+title: "Elección de compañero/a de piso: Unos meses después"
 author: "Sabela Álvarez López"
 date: "2024-05-10"
-output: html_document
+output: 
+  html_document: 
+    toc: true
+    fig_width: 15
 ---
 
 ```{r setup, include=FALSE}
